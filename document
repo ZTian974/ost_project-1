@@ -1,1 +1,41 @@
-Open Source Tools Fianl Project Document.
+Build a blog using Django, Mysql and Apache 
+            --open source tools fianl Project document
+
+Author: Wenjie Chen
+Email: wenjie.chen@nyu.edu
+
+1. Database Design in models.py
+
+Class: User, Blog, Post, Tag
+
+For a field, if option 'blank' is True, the field is allowed to be blank. Default is False.
+
+User
+    username: can only have digital, letter and '_'
+    password:  
+    
+    get_absolute_url(): use username as url
+
+
+Blog
+    user: a user can create many blogs. Relationship is many to one
+    title: 
+    slug: used for url, only cantiain letters and '_'
+    creation_date:
+    
+    get_absolute_url(): use slug as url
+
+Post
+    blog: a blog can have many posts. Relationship is many to one
+    title:
+    body:
+    slug: used for url, only cantiain letters and '_'
+    creation_date
+    modification_date
+    
+    get_absolute_url(): use slug as url
+    
+Tag
+    title
+      
+Image
