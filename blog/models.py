@@ -17,7 +17,7 @@ class User(models.Model):
     def __unicode__(self):
         return '%s' %self.name
         
-     def get_absolute_url(self):
+    def get_absolute_url(self):
         pass
 #        return reverse('blog:view_blog_category', kwargs={'username':self.username})
 
@@ -36,7 +36,6 @@ class Blog(models.Model):
         pass
     
     class Meta:
-        #default ordering, “-” indicates descending order, without “-” will be ordered ascending
         ordering = ('-creation_date',)
 
 class Post(models.Model):
@@ -59,7 +58,12 @@ class Post(models.Model):
 
 class Tag(models.Model):
     title = models.CharField(max_length=50,db_index=True)
+
+    def __unicode__(self):
+        return '%s' %self.title
+
+    def get_absolute_url(self):
+        pass
         
     class Meta:
         ordering = ('title',)
-

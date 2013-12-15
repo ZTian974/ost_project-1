@@ -24,8 +24,12 @@ Blog
     creation_date:
     
     get_absolute_url(): use slug as url
+    class Meta : ordering = ('',) 
+                 default ordering, “-” indicates descending order, without “-” will be ordered ascending
 
-Post
+    
+
+Post !!! didn't add ImageField
     blog: a blog can have many posts. Relationship is many to one
     title:
     body:
@@ -37,5 +41,4 @@ Post
     
 Tag
     title
-      
-Image
+    
