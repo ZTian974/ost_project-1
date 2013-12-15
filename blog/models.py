@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
-import re
+import re,random
 # Create your models here.
 
 def validate_letter(value):
@@ -15,7 +15,7 @@ class User(models.Model):
     password = models.CharField(max_length=20)
 
     def __unicode__(self):
-        return '%s' %self.name
+        return '%s' %self.username
         
     def get_absolute_url(self):
         pass
@@ -24,15 +24,17 @@ class User(models.Model):
 class Blog(models.Model):
     user = models.ForeignKey(User)
     title = models.CharField(max_length=150,db_index=True)
-    slug = models.CharField(max_length=150,db_index=True, validators=[validate_letter])
+    slug = models.SlugField(max_length=150,db_index=True)
     creation_date = models.DateTimeField(auto_now_add=True)
     
     def __unicode__(self):
         return '%s' %self.title
 
+    
     def get_absolute_url(self):
         if slug.strip() == '':
-            slug = title.replace()
+            p = re.compile(r'[^\d\w_-]+')
+            self.slug = p.sub('-',self.title) + str(random.randint(1,999999))
         pass
     
     class Meta:
@@ -43,7 +45,7 @@ class Post(models.Model):
     tags = models.ManyToManyField('Tag',blank=True)
     title = models.CharField(max_length=150,db_index=True)
     body = models.TextField()
-    slug = models.CharField(max_length=150,db_index=True, validators=[validate_letter])
+    slug = models.SlugField(max_length=150,db_index=True)
     creation_date = models.DateTimeField(auto_now_add=True)    
     modification_date = models.DateTimeField(auto_now=True)    
     

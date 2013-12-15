@@ -20,7 +20,8 @@ User
 Blog
     user: a user can create many blogs. Relationship is many to one
     title: 
-    slug: used for url, only cantiain letters and '_'
+    slug: used for url, only cantiain letters and '_'. 
+          using title to generate slug field plus a random int
     creation_date:
     
     get_absolute_url(): use slug as url
@@ -28,7 +29,6 @@ Blog
                  default ordering, “-” indicates descending order, without “-” will be ordered ascending
 
     
-
 Post !!! didn't add ImageField
     blog: a blog can have many posts. Relationship is many to one
     title:
