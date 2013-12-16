@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+{% block title %}Welcome to my blog: test page{% endblock %}
+
+{% block content %}
+    <h2>Blogs</h2>
+    {% if blogs %}
+        <ul>
+        {% for blog in blogs %}
+            <li><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>There are no blogs.</p>
+    {% endif %}
+
+    <h2>Posts</h2>
+    {% if posts %}
+        <ul>
+        {% for post in posts %}
+            <li>{{ post.title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>There are no posts.</p>
+    {% endif %}
+    
+     <h2>Tags</h2>
+    {% if tags %}
+        <ul>
+        {% for tag in tags %}
+            <li>{{ tag.title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>There are no tags.</p>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,14 @@
+<h1>Welcome {{user.username}}</h1>
+
+{% if user.blog_set.all %}
+<h2>These are your Blogs</h2>
+    <ul>
+    {% for blog in user.blog_set.all %}
+        <li><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p> You don't have blogs yet </p>
+{% endif %}
+
+<p><a href="{% url 'blog:create_blog' user.username%}">You can create a new blog</a></p>
