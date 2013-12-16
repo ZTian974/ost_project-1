@@ -2,40 +2,24 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 import re,random
-# Create your models here.
-
-def validate_letter(value):
-    # can only have digital, letter and '_'
-    p = re.compile(r'^[\d\w_]{1,30}$')
-    if p.match(value) == None:
-        raise ValidationError("The number of letters of Username must less than 30 and letters can only have digital, letter and '_'.")
-
-class User(models.Model):
-    username = models.CharField(max_length=30,db_index=True,unique=True, validators=[validate_letter])
-    password = models.CharField(max_length=20)
-
-    def __unicode__(self):
-        return '%s' %self.username
-        
-    def get_absolute_url(self):
-        pass
-#        return reverse('blog:view_blog_category', kwargs={'username':self.username})
+from django.contrib.auth.models import User
 
 class Blog(models.Model):
     user = models.ForeignKey(User)
     title = models.CharField(max_length=150,db_index=True)
-    slug = models.SlugField(max_length=150,db_index=True)
+    slug = models.SlugField(max_length=150,db_index=True,editable=False)
     creation_date = models.DateTimeField(auto_now_add=True)
     
     def __unicode__(self):
         return '%s' %self.title
-
     
     def get_absolute_url(self):
-        if slug.strip() == '':
+        if self.slug.strip() == '':
             p = re.compile(r'[^\d\w_-]+')
             self.slug = p.sub('-',self.title) + str(random.randint(1,999999))
-        pass
+            #don't forget save
+            self.save()
+        return reverse('blog:blog_posts',kwargs={'slug':self.slug})
     
     class Meta:
         ordering = ('-creation_date',)

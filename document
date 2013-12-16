@@ -20,7 +20,7 @@ User
 Blog
     user: a user can create many blogs. Relationship is many to one
     title: 
-    slug: used for url, only cantiain letters and '_'. 
+    slug: used for url, containing only letters, numbers, underscores or hyphens
           using title to generate slug field plus a random int
     creation_date:
     
