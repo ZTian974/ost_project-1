@@ -1,1 +1,8 @@
-create blog {{user.username}}
+<h2>Hello {{user.username}}, you are creating a new blog. </h2>
+{% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
+
+<form name="new_blog" action="{%url 'blog:create_blog' user.username %}" method="post">
+    	{% csrf_token %} 
+    	Title: <input type="text" name="title"><br>
+    	<input type="submit" value="Create">
+</form>
