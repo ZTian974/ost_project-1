@@ -1,0 +1,13 @@
+<h3>You're editing post: {{post.title}}</h3>
+{% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
+
+<form name="editPost" action="{%url 'blog:edit_post' post.slug %}" method="post">
+    	{% csrf_token %} 
+    	Title:<br> <textarea name="title" rows="1" cols="100"> {{ post.title }} </textarea><br>
+    	Body:<br> <textarea name="body" rows="20" cols="100"> {{ post.body }} </textarea><br>
+    	<input type="submit" value="Submit">
+</form>
+
+<p style="color:blue">creation: {{post.creation_date}}<br>
+modification: {{post.modification_date}}</p>
+

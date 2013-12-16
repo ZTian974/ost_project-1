@@ -1,0 +1,14 @@
+<h3>You're creating a new post at Blog: {{blog.title}}</h3>
+
+{% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
+
+<p>Author: <b>{{blog.user.username}}</b> 
+
+<form name="createPost" action="{%url 'blog:create_post' blog.slug %}" method="post">
+    	{% csrf_token %} 
+    	Title:<br> <textarea name="title" rows="1" cols="100"> Please enter a title, which can't be blank </textarea><br>
+    	Body:<br> <textarea name="body" rows="20" cols="100"> enter the body of the article </textarea><br>
+    	Tags:<br> <textarea name="tags" rows="1" cols="100"> Please enter zero or more tags, which are separated by 'space' </textarea><br>
+
+    	<input type="submit" value="Submit">
+</form>
