@@ -2,8 +2,14 @@
 {% block title %}Welcome to OST blog system{% endblock %}
 
 {% block content %}
-<p>After <a href="{%url 'blog:login_page' %}"><b>login</b></a>, you can create a new blog or post articles.<br>
- If you don't login, you can also read other person's blogs and articles.</p>
+<p>
+After login, you can create a new blog or post articles.
+If you don't login, you can also read other person's blogs and articles.<br>
+<a href="{%url 'blog:login_page' %}"><b>login</b></a>
+<a href="{%url 'blog:logout_page' %}"><b>logout</b></a>
+<a href="{% url 'blog:sign_up' %}"><b>Sign up</b></a>
+</p>
+ 
     <h2>Blogs</h2>
     {% if blogs %}
         <ul>
@@ -28,11 +34,11 @@
     
      <h2>Tags</h2>
     {% if tags %}
-        <ul>
+        <p>
         {% for tag in tags %}
-            <li><a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a></li>
+            <b><a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a> </b>   
         {% endfor %}
-        </ul>
+        </p>
     {% else %}
         <p>There are no tags.</p>
     {% endif %}

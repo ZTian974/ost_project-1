@@ -48,11 +48,41 @@ class Post(models.Model):
         __tags = __tags.strip()
         if __tags =='':
             return
-        p = re.compile(r'\s+')
-        ts = p.sub(' ',__tags)
-        for t in ts.split(' '):
-            self.tags.add(t)
-        pass     
+        for t in __tags.split(','):
+            _tag = t.strip()
+            if Tag.objects.filter(title=_tag):
+                self.tags.add(Tag.objects.get(title=_tag))
+            elif _tag:
+                t = Tag(title=_tag)
+                t.save()
+                self.tags.add(t)
+            self.save()
+
+    def show_short_body(self):
+        short_body=''
+        if len(self.body) > 500:
+            short_body = self.body[:500] + ' ......'
+            return short_body
+        else:
+            return self.body     
+
+    def show_html_body(self):
+        html_text = self.body
+        http_link = re.compile(r'http[s]?://[^\s]+')
+        http_img = re.compile(r'.jpg|.png|.gif')
+        hs = http_link.findall(html_text)
+        for h in hs:
+            if http_img.search(h):
+                img = '<br><img border="0" src="%s" width="600" height="450"><br>' %h
+                orl = re.compile(h)
+                html_text = orl.sub(img,html_text)
+            else:
+                text = '<a href="%s">%s</a>' %(h, h)
+                orl = re.compile(h)
+                html_text = orl.sub(text,html_text)
+        line = re.compile(r'\n+')
+        html_text = line.sub('<br>',html_text)
+        return html_text
                         
     def get_absolute_url(self):
         self.create_slug()

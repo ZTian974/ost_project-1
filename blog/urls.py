@@ -4,6 +4,7 @@ from blog import views
 urlpatterns = patterns('',
     url(r'^$',views.index, name='index'),
     url(r'^login/$',views.login_page, name='login_page'),
+    url(r'^logout/$',views.logout_page,name='logout_page'),
     url(r'^sign_up/$',views.sign_up,name='sign_up'),
     url(r'^blog_posts/(?P<slug>[\d\w_-]+)/$',views.blog_posts, name='blog_posts'),
     url(r'^post/(?P<slug>[\d\w_-]+)/$',views.post, name='post'),

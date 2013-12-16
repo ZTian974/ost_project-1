@@ -1,9 +1,8 @@
-{% extends 'blog/base.html' %} 
-{% block head_title %}Welcome to {{ blog.user.username }}'s blog{% endblock %}
-{% block title %}Welcome to: {{ blog.title }}{% endblock %}
+{% extends 'blog/base_post.html' %} 
+{% block head_title %}posts marked by tag: {{tag.title}} {% endblock %}
+{% block title %}You're watching posts taged by: {{tag.title}}{% endblock %}
 
 {% block content %}
-
 {% if error_message %}<p style="color:red;font-size:20px" ><strong>{{error_message}}</strong></p>{% endif %}
 
     {% if posts %}
@@ -12,8 +11,8 @@
             <li style="font-size:20px;"><b>
                 <a href="{% url 'blog:post' post.slug%}">{{ post.title }}</a></b>
             </li>
-            <p>Author: <b>{{user.username}}</b></p>
-             
+            <p>Author: <b>{{post.blog.user.username}}</b></p> 
+            
             <p style="border:1px solid">
             {% autoescape off %} 
             {{post.show_short_body}}                        
@@ -36,7 +35,7 @@
         {% endfor %}
         </ul>
     {% else %}
-        <p>You don't have posts yet.</p>
+        <p>This tag didn't have any posts yet.</p>
     {% endif %}
-<p style="color:red"><a href="{% url 'blog:create_post' blog.slug %}">Create a new post</a></p>
-{% endblock %}
+
+{%endblock%}

@@ -1,5 +1,8 @@
-<h1>Hello {{user.username}}</h1>
+{% extends 'blog/base.html' %} 
+{% block head_title %}Blog home page of user:{{ user.username }} {% endblock %}
+{% block title %}Hello {{user.username}} {% endblock %}
 
+{% block content %}
 {% if user.blog_set.all %}
 <h2>These are your Blogs</h2>
     <ul>
@@ -12,4 +15,4 @@
 {% endif %}
 
 <p>You can create a <a href="{% url 'blog:create_blog' user.username%}">new blog</a></p>
-<p><a href="{% url 'blog:index' %}">Blog home page</a></p>
+{% endblock %}
