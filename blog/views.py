@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login,logout
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 import re,copy
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
     context = {
@@ -48,11 +49,15 @@ def blog_posts(request,slug):
     blog = get_object_or_404(Blog,slug=slug)
     user = blog.user
     posts = blog.post_set.all()
-    return render(request,'blog/blog_posts.html',{
-        'blog':blog,
-        'posts':posts,
-        'user':user,    
-    })
+    paginator = Paginator(posts,10)
+    page = request.GET.get('page')
+    try:
+        post_page = paginator.page(page)
+    except PageNotAnInteger:
+        post_page = paginator.page(1)
+    except EmptyPage:
+        post_page = paginator.page(paginator.num_pages)
+    return render(request,'blog/blog_posts.html',{'blog':blog,'posts':post_page,'user':user,})
 
 def create_blog(request,username):
     _user = get_object_or_404(User,username=username)
@@ -189,9 +194,17 @@ def create_post(request,slug):
 def tag(request,slug):
     tag = get_object_or_404(Tag,slug=slug)
     posts = tag.post_set.all()
+    paginator = Paginator(posts,10)
+    page = request.GET.get('page')
+    try:
+        post_page = paginator.page(page)
+    except PageNotAnInteger:
+        post_page = paginator.page(1)
+    except EmptyPage:
+        post_page = paginator.page(paginator.num_pages)
     return render(request, 'blog/tag.html',{
         'tag':tag,
-        'posts':posts,
+        'posts':post_page,
         })
     
     

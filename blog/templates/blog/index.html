@@ -2,7 +2,7 @@
 {% block title %}Welcome to OST blog system{% endblock %}
 
 {% block content %}
-<p>
+<p style="font-size:18px;">
 After login, you can create a new blog or post articles.
 If you don't login, you can also read other person's blogs and articles.<br>
 <a href="{%url 'blog:login_page' %}"><b>login</b></a>
@@ -10,31 +10,31 @@ If you don't login, you can also read other person's blogs and articles.<br>
 <a href="{% url 'blog:sign_up' %}"><b>Sign up</b></a>
 </p>
  
-    <h2>Blogs</h2>
+    <h2>Latest Blogs</h2>
     {% if blogs %}
-        <ul>
+        <ol style="font-size:19px;">
         {% for blog in blogs %}
             <li><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></li>
         {% endfor %}
-        </ul>
+        </ol>
     {% else %}
-        <p>There are no blogs.</p>
+        <p style="font-size:19px;">There are no blogs.</p>
     {% endif %}
 
-    <h2>Posts</h2>
+    <h2>Lastest Posts</h2>
     {% if posts %}
-        <ul>
+        <ol>
         {% for post in posts %}
-            <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+            <li style="font-size:19px;"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
         {% endfor %}
-        </ul>
+        </ol>
     {% else %}
         <p>There are no posts.</p>
     {% endif %}
     
      <h2>Tags</h2>
     {% if tags %}
-        <p>
+        <p style="font-size:18px;">
         {% for tag in tags %}
             <b><a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a> </b>   
         {% endfor %}
