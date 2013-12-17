@@ -217,7 +217,7 @@ def lists(request):
             newdoc = Document(docfile = request.FILES['docfile'])
             newdoc.save()
             # Redirect to the document list after POST
-            return HttpResponseRedirect(reverse('blog:list'))
+            return HttpResponseRedirect(reverse('blog:upload_file'))
     else:
         form = DocumentForm() # A empty, unbound form
 
@@ -225,7 +225,7 @@ def lists(request):
     documents = Document.objects.all()
 
     # Render list page with the documents and the form
-    return render_to_response('blog/list.html',
+    return render_to_response('blog/upload_file.html',
         {'documents': documents, 'form': form},
         context_instance=RequestContext(request)
     )    

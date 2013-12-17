@@ -13,5 +13,5 @@ urlpatterns = patterns('',
     url(r'^create_post/(?P<slug>[\d\w_-]+)/$',views.create_post, name='create_post'),
     url(r'^tag/(?P<slug>[\d\w_-]+)/$',views.tag, name='tag'),
     url(r'^create_blog/(?P<username>.+)/$',views.create_blog, name='create_blog'),
-    url(r'^list/$', views.lists, name='list'),
+    url(r'^upload_file/$', views.lists, name='upload_file'),
 ) 
