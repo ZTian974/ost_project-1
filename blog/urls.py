@@ -1,6 +1,7 @@
 from django.conf.urls import patterns,url
 from blog import views
 
+
 urlpatterns = patterns('',
     url(r'^$',views.index, name='index'),
     url(r'^login/$',views.login_page, name='login_page'),
@@ -12,4 +13,5 @@ urlpatterns = patterns('',
     url(r'^create_post/(?P<slug>[\d\w_-]+)/$',views.create_post, name='create_post'),
     url(r'^tag/(?P<slug>[\d\w_-]+)/$',views.tag, name='tag'),
     url(r'^create_blog/(?P<username>.+)/$',views.create_blog, name='create_blog'),
-)
+    url(r'^list/$', views.lists, name='list'),
+) 

@@ -1,10 +1,12 @@
-from django.shortcuts import render,get_object_or_404
-from blog.models import Blog,Post,Tag
+from django.shortcuts import render,get_object_or_404,render_to_response
+from blog.models import Blog,Post,Tag, DocumentForm, Document
 from django.contrib.auth import authenticate, login,logout
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 import re,copy
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.template import RequestContext
+from django.core.urlresolvers import reverse
 
 def index(request):
     context = {
@@ -207,7 +209,26 @@ def tag(request,slug):
         'posts':post_page,
         })
     
-    
+def lists(request):
+    # Handle file upload
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            newdoc = Document(docfile = request.FILES['docfile'])
+            newdoc.save()
+            # Redirect to the document list after POST
+            return HttpResponseRedirect(reverse('blog:list'))
+    else:
+        form = DocumentForm() # A empty, unbound form
+
+    # Load documents for the list page
+    documents = Document.objects.all()
+
+    # Render list page with the documents and the form
+    return render_to_response('blog/list.html',
+        {'documents': documents, 'form': form},
+        context_instance=RequestContext(request)
+    )    
     
     
     

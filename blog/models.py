@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 import re,random
 from django.contrib.auth.models import User
+from django import forms
 
 class Blog(models.Model):
     user = models.ForeignKey(User)
@@ -110,3 +111,13 @@ class Tag(models.Model):
         
     class Meta:
         ordering = ('title',)
+        
+class DocumentForm(forms.Form):
+#    title = forms.CharField(max_length=50)
+    docfile = forms.FileField(
+        label='Select a file'
+    )
+
+class Document(models.Model):
+    docfile = models.FileField(upload_to='documents/%Y/%m/%d')
+    
