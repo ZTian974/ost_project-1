@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 """
 
 import os
+import sys
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ost_project.settings")
 
 sys.path.append('/home/ubuntu/ost_project/')
