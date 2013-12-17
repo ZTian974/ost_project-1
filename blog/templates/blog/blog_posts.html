@@ -54,4 +54,5 @@
 </div>
 
 <p style="color:red"><a href="{% url 'blog:create_post' blog.slug %}">Create a new post</a></p>
+<a href="{% url 'blog:rss' blog.id %}" target="_blank">RSS</a> 
 {% endblock %}

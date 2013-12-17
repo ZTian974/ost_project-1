@@ -1,6 +1,6 @@
 from django.conf.urls import patterns,url
 from blog import views
-
+from rss import RssFeed
 
 urlpatterns = patterns('',
     url(r'^$',views.index, name='index'),
@@ -14,4 +14,5 @@ urlpatterns = patterns('',
     url(r'^tag/(?P<slug>[\d\w_-]+)/$',views.tag, name='tag'),
     url(r'^create_blog/(?P<username>.+)/$',views.create_blog, name='create_blog'),
     url(r'^upload_file/$', views.lists, name='upload_file'),
+    url(r'^rss/(?P<blog_id>\d+)/$',RssFeed(),name='rss'),
 ) 
