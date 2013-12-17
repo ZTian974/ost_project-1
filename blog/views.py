@@ -96,7 +96,7 @@ def sign_up(request):
             return render(request,'blog/sign_up.html',{
                 'error_message':"username can only have digital, letter and '_'."
                 })
-        if User.objects.get(username__exact=_username.strip()) != None :
+        if User.objects.filter(username = _username.strip()) :
             return render(request,'blog/sign_up.html',{
                 'error_message':("the username: '%s' has been registered." %_username)
                 })
