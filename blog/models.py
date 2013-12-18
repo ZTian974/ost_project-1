@@ -47,6 +47,7 @@ class Post(models.Model):
     
     def add_tags(self,__tags):
         __tags = __tags.strip()
+        
         if __tags =='':
             return
         for t in __tags.split(','):
