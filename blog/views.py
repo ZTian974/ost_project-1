@@ -209,8 +209,18 @@ def tag(request,slug):
         'posts':post_page,
         })
     
-def lists(request):
-    # Handle file upload
+def lists(request):        
+        # Handle file upload
+    if request.user.is_authenticated() == False:
+        error_message="You're not authenticated user, you can't upload_file"
+        return render_to_response('blog/upload_file.html',
+            {'documents': Document.objects.all(),
+             'form': DocumentForm(),
+             'error_message':error_message},
+            context_instance=RequestContext(request)
+        )
+    else:
+        error_message=''        
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
@@ -226,7 +236,7 @@ def lists(request):
 
     # Render list page with the documents and the form
     return render_to_response('blog/upload_file.html',
-        {'documents': documents, 'form': form},
+        {'documents': documents, 'form': form, 'error_message':error_message},
         context_instance=RequestContext(request)
     )    
     

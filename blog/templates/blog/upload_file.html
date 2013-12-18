@@ -18,7 +18,8 @@
                 {% else %}
                         <p>No documents.</p>
                 {% endif %}
-
+                
+                {% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
                 <!-- Upload form. Note enctype attribute! -->
                 <form action="{% url 'blog:upload_file' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -30,7 +31,7 @@
                         </p>
                         <p><input type="submit" value="Upload" /></p>
                 </form>
-                
+                <p><a href="{% url 'blog:index' %}">Blog home page</a></p> 
         </body>
 
 </html> 
