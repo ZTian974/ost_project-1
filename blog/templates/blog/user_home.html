@@ -15,4 +15,5 @@
 {% endif %}
 
 <p>You can create a <a href="{% url 'blog:create_blog' user.username%}">new blog</a></p>
+<p> <a href="{% url 'blog:upload_file' %}">Upload file or image</a></p>
 {% endblock %}
