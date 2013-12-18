@@ -8,8 +8,7 @@ Link of OST blog system: http://ec2-54-200-28-13.us-west-2.compute.amazonaws.com
 
 Implement all features in Final project assignment.
 
-Page Design in *.html:
-    
+Page Design in *.html:    
     blog_posts.html: display all posts of a blog, eache page can have 10 posts
     create_blog: when a user login, he can create a new blog
     edit_post: only author can edit his post
