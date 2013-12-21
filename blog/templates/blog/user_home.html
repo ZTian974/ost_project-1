@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %} 
+{% block head_title %}Blog home page of user:{{ user.username }} {% endblock %}
+{% block title %}Hello {{user.username}} {% endblock %}
+
+{% block content %}
+{% if user.blog_set.all %}
+<h2>These are your Blogs</h2>
+    <ul>
+    {% for blog in user.blog_set.all %}
+        <li><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p> You don't have blogs yet </p>
+{% endif %}
+
+<p>You can create a <a href="{% url 'blog:create_blog' user.username%}">new blog</a></p>
+{% endblock %}

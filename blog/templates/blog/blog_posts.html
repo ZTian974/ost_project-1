@@ -1,0 +1,58 @@
+{% extends 'blog/base.html' %} 
+{% block head_title %}Welcome to {{ blog.user.username }}'s blog{% endblock %}
+{% block title %}Welcome to: {{ blog.title }}{% endblock %}
+
+{% block content %}
+<p style="font-size:18px;">Author: <b>{{user.username}}</b></p>
+{% if error_message %}<p style="color:red;font-size:20px" ><strong>{{error_message}}</strong></p>{% endif %}
+
+    {% if posts %}
+        <ol>
+        {% for post in posts %}
+            <li style="font-size:20px;"><b>
+                <a href="{% url 'blog:post' post.slug%}">{{ post.title }}</a></b>
+            </li>
+       
+            <p style="border:1px solid">
+            {% autoescape off %} 
+            {{post.show_short_body}}                        
+            {% endautoescape %} 
+            {%if post.body != post.show_short_body%}
+                <br><a href="{% url 'blog:post' post.slug%}">Read more</a>
+            {%endif%}
+            </p>
+
+            <p><b>Tag: </b>
+                {% for tag in post.tags.all %}
+                <a href="{{ tag.get_absolute_url}}">{{tag.title}}</a>,
+                {% endfor %}
+            </p> 
+        
+            <p style="color:Orchid">creation: {{post.creation_date}}<br>
+                modification: {{post.modification_date}}
+            </p>
+        {% endfor %}
+        </ol>
+    {% else %}
+        <p>You don't have posts yet.</p>
+    {% endif %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if posts.has_previous %}
+            <a href="?page={{ posts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+        </span>
+
+        {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+<p style="color:red"><a href="{% url 'blog:create_post' blog.slug %}">Create a new post</a></p>
+<a href="{% url 'blog:rss' blog.id %}" target="_blank">RSS</a> 
+{% endblock %}

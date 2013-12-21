@@ -1,0 +1,46 @@
+{% extends 'blog/base.html' %}
+{% block title %}Welcome to OST blog system{% endblock %}
+
+{% block content %}
+<p style="font-size:18px;">
+After login, you can create a new blog or post articles.
+If you don't login, you can also read other person's blogs and articles.<br>
+<a href="{%url 'blog:login_page' %}"><b>login</b></a>
+<a href="{%url 'blog:logout_page' %}"><b>logout</b></a>
+<a href="{% url 'blog:sign_up' %}"><b>Sign up</b></a>
+</p>
+ 
+    <h2>Latest Blogs</h2>
+    {% if blogs %}
+        <ol style="font-size:19px;">
+        {% for blog in blogs %}
+            <li><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></li>
+        {% endfor %}
+        </ol>
+    {% else %}
+        <p style="font-size:19px;">There are no blogs.</p>
+    {% endif %}
+
+    <h2>Lastest Posts</h2>
+    {% if posts %}
+        <ol>
+        {% for post in posts %}
+            <li style="font-size:19px;"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+        {% endfor %}
+        </ol>
+    {% else %}
+        <p>There are no posts.</p>
+    {% endif %}
+    
+     <h2>Tags</h2>
+    {% if tags %}
+        <p style="font-size:18px;">
+        {% for tag in tags %}
+            <b><a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a> </b>   
+        {% endfor %}
+        </p>
+    {% else %}
+        <p>There are no tags.</p>
+    {% endif %}
+
+{% endblock %}

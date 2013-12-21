@@ -82,7 +82,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = '/var/www/media/ost_project/'
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -97,8 +97,3 @@ STATIC_ROOT = '/var/www/static/ost_project/'
 TEMPLATE_DIRS=(
     '~/ost_project/ost_project/templates',
 )
-
-try:
-    from local_settings import *
-except:
-    print 'No local settings'
