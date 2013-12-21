@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %} 
+{% block head_title %}Create a new Blog{% endblock %}
+{% block title %}Hello {{user.username}}, you are creating a new blog.{% endblock %}
+
+{% block content %}
+
+{% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
+
+<form name="new_blog" action="{%url 'blog:create_blog' user.username %}" method="post">
+    	{% csrf_token %} 
+    	Title: <input type="text" name="title"><br>
+    	<input type="submit" value="Create">
+</form>
+{% endblock %}

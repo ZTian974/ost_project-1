@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>{% block head_title %}Welcome to my blog {% endblock %}</title>
+    </head>
+    <body>
+        <h1>{% block title %}Welcome to my blog{% endblock %}</h1>
+        {% block content %}
+
+        {% endblock %}
+        <p> <a href="{% url 'blog:upload_file' %}">Upload file or image</a></p>
+        <p><a href="{% url 'blog:index' %}">Blog home page</a></p>
+    </body>
+</html>

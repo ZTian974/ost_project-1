@@ -1,44 +1,77 @@
-Build a blog using Django, Mysql and Apache 
-            --open source tools fianl Project document
+open source tools final project developer guide
 
 Author: Wenjie Chen
 Email: wenjie.chen@nyu.edu
+Platform: Django, Mysql, Apache, Ubuntu, amazon web services
+Link of OST blog system: http://ec2-54-200-28-13.us-west-2.compute.amazonaws.com/blog/
 
-1. Database Design in models.py
 
-Class: User, Blog, Post, Tag
+Implement all features in Final project assignment.
 
-For a field, if option 'blank' is True, the field is allowed to be blank. Default is False.
+Page Design in *.html:    
+    blog_posts.html: display all posts of a blog, eache page can have 10 posts
+    create_blog: when a user login, he can create a new blog
+    edit_post: only author can edit his post
+    index: home page of blog, listing latest blogs and posts, and all tags
+    login logout and signup: login, logout and signup
+    post: the home page of a post
+    tag: list all posts of a tag
+    upload_file: user can upload any files or image
+    user_home: when a user login, he is redirected to his home page.
 
-User
-    username: can only have digital, letter and '_'
-    password:  
-    
-    get_absolute_url(): use username as url
 
+
+developer guide
+
+Model Design in models.py
+
+Class: Blog, Post, Tag
 
 Blog
-    user: a user can create many blogs. Relationship is many to one
-    title: 
-    slug: used for url, only cantiain letters and '_'. 
-          using title to generate slug field plus a random int
-    creation_date:
+    fields:
+        user: foreign key, a user can have many blogs. The relationship between user and blos is many to one.
+        title: title of the blog
+        slug: used for url 
+        creation_date: the time of the blog is created
     
-    get_absolute_url(): use slug as url
-    class Meta : ordering = ('',) 
-                 default ordering, “-” indicates descending order, without “-” will be ordered ascending
+    methods:
+        create_slug(): using title to generate slug plus a random int
+        get_absolute_url(): get the permalink of blog
 
+    inner class:
+        Meta:
+            set default display order as: descending of creation_date  
     
-Post !!! didn't add ImageField
-    blog: a blog can have many posts. Relationship is many to one
-    title:
-    body:
-    slug: used for url, only cantiain letters and '_'
-    creation_date
-    modification_date
+Post
+    fields:
+        blog: foreign key. The relationship between post and blog is many to one
+        tags: many to many key. a post can have any tags and a tag can have any posts
+        title: title of post
+        body: text area of post
+        slug: used for url
+        creation_date: the time of the post is created
+        modification_date: the time of the post is modified
     
-    get_absolute_url(): use slug as url
+    methods:
+        create_slug(): using title to generate slug plus a random int
+        add_tags(): add tags to this post
+        show_short_body(): create a short content of the post, when the number of letters of a post is more than 500
+        show_html_body(): display hypertext link and image in post page
+        get_absolute_url(): get the permalink of post
+    
+    inner class:
+        Meta:
+            set default display order as: descending of modification_date  
     
 Tag
-    title
+    fields:
+        title = the title of tag
+        slug = used for url
     
+    methods:
+        create_slug(): using title to generate slug plus a random int
+        get_absolute_url(): get the permalink of tag
+        
+    inner class:
+        Meta:
+            sorted by title in ascending order   
