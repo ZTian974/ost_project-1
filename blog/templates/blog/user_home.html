@@ -3,21 +3,21 @@
 
 {%block content%}
 <div class="container">
-{% if user.blog_set.all %}
-	<div class="blog-header">
-		<h2 class="blog-title"> Welcome {{user.username}}</h2>
-		<h3 class="lead blog-description">There are your blogs: </h3> 	
-	</div>
-
+    <div class="blog-header">
+        <h2 class="blog-title"> Welcome {{user.username}}</h2>
+           
+    </div>
  	<div class="row">   
  		<div class="col-sm-8 blog-main">
+            {% if user.blog_set.all %}
+            <h3 class="lead blog-description">There are your blogs: </h3>
     		<ul>
     		{% for blog in user.blog_set.all %}
         		<li style="font-size:20px;"><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></li>
 		    {% endfor %}
     		</ul>
 {% else %}
-    <p class="lead blog-description"> You don't have blogs yet </p>
+    <p class="lead blog-description"> You don't have blogs yet. Please create a new one. </p>
 {% endif %}
 
 <br>
@@ -31,16 +31,18 @@
 <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
     <div class="sidebar-module sidebar-module-inset">
     	<div class="sidebar-module">
-		<h4>Your posts</h4>
+		<h4>Your posts:</h4>
 			<ol class="list-unstyled">
 				{% for blog in user.blog_set.all %}
 					{% for post in blog.post_set.all%}
     					<li><a href="{% url 'blog:post' post.slug %}">{{post.title}} </a></li>
     				{% empty %}
-		    			<p> You don't have any posts yet</p>    				
+                        {% if forloop.first%}
+		    			   <p> You don't have any blogs yet.</p>
+                        {% endif%}
     				{% endfor %}
     			{% empty %}
-    				<p> You don't have any posts yet</p>
+    				<p> You don't have any blogs yet.</p>
     			{% endfor %}
     		</ol>
     	</div>

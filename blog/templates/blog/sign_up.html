@@ -1,16 +1,21 @@
-{% extends 'blog/base.html' %} 
-{% block head_title %}Sign up a new user{% endblock %}
-{% block title %}Welcome to sign up OST blog system{% endblock %}
+{% extends 'blog/bootstrap_base.html' %} 
+{% block title %}Sign up{% endblock %}
 
 {% block content %}
-{% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
+<div class="container">
+	<div class="row">
+		<br>
+      <form class="form-signin" role="form" method="post" style="padding: 15px;min-width: 250px;" action="{%url 'blog:sign_up' %}">
+        {% csrf_token %} 
+        <h2 class="form-signin-heading">Welcome to sign up OST Blog System</h2>
+        {% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
+        <input type="text" class="form-control" name="username" placeholder="Username" required autofocus>
+        <input type="password" class="form-control" name="password" placeholder="Password" required>
+        <input type="password" class="form-control" name="password_re" placeholder="Confirm Password" required>
 
-<form name="login" action="{%url 'blog:sign_up' %}" method="post">
-    	{% csrf_token %} 
-    	Username: <input type="text" name="username"><br>
-    	Password: <input type="password" name="password"><br>
-       	Confirm Password: <input type="password" name="password_re"><br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+      </form>
 
-    	<input type="submit" value="Sign Up">
-</form>
+    </div> <!-- /container -->
+</div>
 {%endblock%}
