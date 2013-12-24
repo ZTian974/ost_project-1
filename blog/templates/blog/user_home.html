@@ -1,18 +1,53 @@
-{% extends 'blog/base.html' %} 
-{% block head_title %}Blog home page of user:{{ user.username }} {% endblock %}
-{% block title %}Hello {{user.username}} {% endblock %}
+{% extends 'blog/bootstrap_base.html' %} 
+{% block title %}home page of user:{{ user.username }}{% endblock %}
 
-{% block content %}
+{%block content%}
+<div class="container">
 {% if user.blog_set.all %}
-<h2>These are your Blogs</h2>
-    <ul>
-    {% for blog in user.blog_set.all %}
-        <li><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></li>
-    {% endfor %}
-    </ul>
+	<div class="blog-header">
+		<h2 class="blog-title"> Welcome {{user.username}}</h2>
+		<h3 class="lead blog-description">There are your blogs: </h3> 	
+	</div>
+
+ 	<div class="row">   
+ 		<div class="col-sm-8 blog-main">
+    		<ul>
+    		{% for blog in user.blog_set.all %}
+        		<li style="font-size:20px;"><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></li>
+		    {% endfor %}
+    		</ul>
 {% else %}
-    <p> You don't have blogs yet </p>
+    <p class="lead blog-description"> You don't have blogs yet </p>
 {% endif %}
 
-<p>You can create a <a href="{% url 'blog:create_blog' user.username%}">new blog</a></p>
-{% endblock %}
+<br>
+<a href="{% url 'blog:create_blog' user.username%}">
+	<button type="button" class="btn btn-primary" >new blog</button>
+</a>
+
+
+</div><!-- /.blog-main -->
+
+<div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+    <div class="sidebar-module sidebar-module-inset">
+    	<div class="sidebar-module">
+		<h4>Your posts</h4>
+			<ol class="list-unstyled">
+				{% for blog in user.blog_set.all %}
+					{% for post in blog.post_set.all%}
+    					<li><a href="{% url 'blog:post' post.slug %}">{{post.title}} </a></li>
+    				{% empty %}
+		    			<p> You don't have any posts yet</p>    				
+    				{% endfor %}
+    			{% empty %}
+    				<p> You don't have any posts yet</p>
+    			{% endfor %}
+    		</ol>
+    	</div>
+	</div>
+</div>
+
+
+</div><!-- /.raw -->
+</div><!-- /.container -->
+{%endblock content%}

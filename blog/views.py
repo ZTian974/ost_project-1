@@ -238,4 +238,11 @@ def lists(request):
     return render_to_response('blog/upload_file.html',
         {'documents': documents, 'form': form, 'error_message':error_message},
         context_instance=RequestContext(request)
-    )    
+    )
+
+def about_me(request):
+    return HttpResponse("about_me")
+
+def user_home(request, username):
+    _user=get_object_or_404(User,username=username)
+    return render(request,'blog/user_home.html',{'user':_user})

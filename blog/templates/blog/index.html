@@ -1,46 +1,61 @@
-{% extends 'blog/base.html' %}
-{% block title %}Welcome to OST blog system{% endblock %}
+{% extends "blog/bootstrap_base.html" %}
+{% load staticfiles %}
 
-{% block content %}
-<p style="font-size:18px;">
-After login, you can create a new blog or post articles.
-If you don't login, you can also read other person's blogs and articles.<br>
-<a href="{%url 'blog:login_page' %}"><b>login</b></a>
-<a href="{%url 'blog:logout_page' %}"><b>logout</b></a>
-<a href="{% url 'blog:sign_up' %}"><b>Sign up</b></a>
-</p>
+    {% block title %}
+    <title>Home page of OST blog</title>
+    {% endblock title%}
  
-    <h2>Latest Blogs</h2>
-    {% if blogs %}
-        <ol style="font-size:19px;">
-        {% for blog in blogs %}
-            <li><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></li>
-        {% endfor %}
-        </ol>
-    {% else %}
-        <p style="font-size:19px;">There are no blogs.</p>
-    {% endif %}
+    {%block posts%}
+        {% if posts %}
+            {% for post in posts%}
+                <div class="blog-post">
+                    <h2 class="blog-post-title">{{post.title}}</h2>
+                    <p class="blog-post-meta">{{post.modification_date}} by 
+                        <a href="{% url 'blog:user_home' post.blog.user.username %}">{{post.blog.user.username}}</a>
+                    </p>
+                    <hr>
+                    <div class="col-xs-6 col-md-4">
+                        <a href="http://127.0.0.1:8000/media/documents/2013/12/20/mac_os_x_lion-1920x1080.jpg" class="thumbnail">
+                        <img src="http://127.0.0.1:8000/media/documents/2013/12/20/mac_os_x_lion-1920x1080.jpg" alt="...">
+                        </a>
+                    </div>
+                    <p>
+                    {% autoescape off %} 
+                    {{post.show_short_body}}                        
+                    {% endautoescape %} 
+                        <br><a href="{% url 'blog:post' post.slug%}">Read more</a>
+                    </p>
+                </div>
+            {%endfor%}
 
-    <h2>Lastest Posts</h2>
-    {% if posts %}
-        <ol>
-        {% for post in posts %}
-            <li style="font-size:19px;"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
-        {% endfor %}
-        </ol>
-    {% else %}
-        <p>There are no posts.</p>
-    {% endif %}
+        {% else %}
+            <p> There are no any posts yet.</p>
+        {% endif %}    
+
+    {%endblock posts%}
     
-     <h2>Tags</h2>
-    {% if tags %}
-        <p style="font-size:18px;">
-        {% for tag in tags %}
-            <b><a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a> </b>   
-        {% endfor %}
-        </p>
-    {% else %}
-        <p>There are no tags.</p>
-    {% endif %}
+    {%block blogs%}
+        <h4>Blogs</h4>
+        <ol class="list-unstyled">
+        {% if blogs %}
+            {% for blog in blogs %}
+                <li><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></li>
+            {% endfor %}
+        {% else %}
+            <li>There are no blogs.</li>
+        {% endif %}
+        </ol>
+    {%endblock blogs%}
 
-{% endblock %}
+    {%block tags%}
+    <h4>Tags</h4>
+    <ol class="list-unstyled">
+        {%if tags%}
+            {%for tag in tags %}
+                <li><a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a></li>
+            {%endfor%}
+        {%else %}
+            <li>There are no tags yet.</li>
+        {%endif%}
+    </ol>
+    {%endblock tags%}

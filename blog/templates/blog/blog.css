@@ -50,6 +50,7 @@ h6, .h6 {
   padding: 10px;
   font-weight: 500;
   color: #cdddeb;
+  font-size: 20px;
 }
 .blog-nav-item:hover,
 .blog-nav-item:focus {
