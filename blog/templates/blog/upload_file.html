@@ -1,37 +1,49 @@
-<!DOCTYPE html>
-<html>
-        <head>
-                <meta charset="utf-8">
-                <title>Minimal Django File Upload Example</title>        
-        </head>
+{% extends "blog/bootstrap_base.html" %}
+{% load staticfiles %}
 
-        <body>
-                <!-- List of uploaded documents -->
-                {% if documents %}
-                        <ul>
-                        {% for document in documents %}
-                                <li><a href="{{ document.docfile.url }}">
-                                {{ document.docfile.name }}
-                                </a></li>
-                        {% endfor %}
-                        </ul>
-                {% else %}
-                        <p>No documents.</p>
-                {% endif %}
+{% block title %}
+    <title>Upload files</title>
+{% endblock title%}
+
+
+{%block content%}
+    <!-- List of uploaded documents -->
+    <div class="container">
+
+        <div class="blog-header">
+            <br>
+            <h2 class="blog-title">Upload files:</h2>
+        </div>
+
+        <div class="row">
+                {% for document in documents %}
+                    <div class="col-xs-6 col-md-4">
+                        <a href="{{ document.docfile.url}}" class="thumbnail">
+                            <img src="{{document.docfile.url}}">
+                        </a>
+                    </div>
+                {%empty%}
+                    <p class="blog-post-title">Don't have any uploads</p>
+                {% endfor %}
                 
                 {% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
                 <!-- Upload form. Note enctype attribute! -->
+                <br>
+                <div class="col-md-12">
                 <form action="{% url 'blog:upload_file' %}" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
+                    {% csrf_token %}
                         <p>{{ form.non_field_errors }}</p>
-                        <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+            
+                        <p class="blog-description">{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
                         <p>
-                                {{ form.docfile.errors }}
-                                {{ form.docfile }}
+                            {{ form.docfile.errors }}
+                            {{ form.docfile }}
                         </p>
-                        <p><input type="submit" value="Upload" /></p>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary col-xs-2">Upload</button>
+                    </div>
                 </form>
-                <p><a href="{% url 'blog:index' %}">Blog home page</a></p> 
-        </body>
-
-</html> 
+                </div>
+        </div> <!-- ./row -->
+    </div><!-- container -->
+{%endblock content%}

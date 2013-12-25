@@ -1,28 +1,46 @@
-{% extends 'blog/base_post.html' %} 
-{% block head_title %}post {{post.title}} content{% endblock %}
+{% extends "blog/bootstrap_base.html" %}
+{% load staticfiles %}
+
 {% block title %}{{post.title}}{% endblock %}
 
-{% block content %}
+{%block header%}
+	
+{%endblock header%}
 
-{% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
+{% block posts %}
 
-<p>Author: <b>{{user.username}}</b> 
-
-<p style="border:1px solid">
+<div class="blog-post">
+	<br>
+	{% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
+    <h2 class="blog-post-title">{{post.title}}</h2>
+    <p class="blog-post-meta">{{post.modification_date}} by 
+    <a href="{% url 'blog:user_home' post.blog.user.username %}">{{post.blog.user.username}}
+    </a>    
+    </p>
+    <hr>
+    <p>
     {% autoescape off %} 
     {{post.show_html_body}}                        
     {% endautoescape %} 
-</p>
+    </p>
+    <p>
+    	{% for tag in post.tags.all %}
+    		{% if forloop.first %}
+    			<b>Tag: </b>
+    		{% endif %}
+    		<a href="{{ tag.get_absolute_url}}">{{tag.title}}</a>
+    		{% if forloop.last %}
+                {%else%}
+                    ,
+                {%endif%}
+    	{%empty%}
 
-<p><b>Tag: </b>
-    {% for tag in post.tags.all %}
-    <a href="{{ tag.get_absolute_url}}">{{tag.title}}</a>,
-    {% endfor %}
-</p> 
+    	{% endfor %}
+	</p>
+</div>
 
-<p style="color:Orchid">creation: {{post.creation_date}}<br>
-modification: {{post.modification_date}}</p>
+<a href="{% url 'blog:edit_post' post.slug%}" class="btn btn-info " role="button" >Edit</a>
+{%endblock posts%}
 
-<p><a href="{% url 'blog:edit_post' post.slug%}">Edit</a></p>
-
-{%endblock%}
+{%block pager%}
+{%endblock pager%}

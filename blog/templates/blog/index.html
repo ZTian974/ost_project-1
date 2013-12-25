@@ -20,12 +20,16 @@
                         </a>
                     </div>
                     <p>
-                    {% autoescape off %} 
-                    {{post.show_short_body}}                        
-                    {% endautoescape %} 
+                        {% autoescape off %} 
+                        {{post.show_short_body}}                        
+                        {% endautoescape %} 
                         <br><a href="{% url 'blog:post' post.slug%}">Read more</a>
                     </p>
+                    
                 </div>
+                <br>
+                <br>
+               
             {%endfor%}
 
         {% else %}

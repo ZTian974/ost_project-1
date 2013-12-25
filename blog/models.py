@@ -75,7 +75,7 @@ class Post(models.Model):
         hs = http_link.findall(html_text)
         for h in hs:
             if http_img.search(h):
-                img = '<br><img border="0" src="%s" width="600" height="450"><br>' %h
+                img = '<br><a href="%s"><img border="0" src="%s" width="400" height="300"></a><br>' %(h, h)
                 orl = re.compile(h)
                 html_text = orl.sub(img,html_text)
             else:
@@ -122,5 +122,3 @@ class DocumentForm(forms.Form):
 class Document(models.Model):
     docfile = models.FileField(upload_to='documents/%Y/%m/%d')
     
-# class Comment(models.Model):
-#     user = models.ForeignKey(User)

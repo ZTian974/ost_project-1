@@ -1,14 +1,25 @@
-{% extends 'blog/base.html' %} 
-{% block head_title %}Create a new Blog{% endblock %}
-{% block title %}Hello {{user.username}}, you are creating a new blog.{% endblock %}
+{% extends 'blog/bootstrap_base.html' %} 
+{% block title %}creating a new blog{% endblock %}
 
-{% block content %}
+{%block content%}
 
+<div class="container">
 {% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
-
-<form name="new_blog" action="{%url 'blog:create_blog' user.username %}" method="post">
-    	{% csrf_token %} 
-    	Title: <input type="text" name="title"><br>
-    	<input type="submit" value="Create">
+<br>
+<br>
+<br>
+<form role="form" method="post" style="padding: 15px;min-width: 250px;" action="{%url 'blog:create_blog' user.username %}">
+    {% csrf_token %}
+    <div class="text-left"> 
+        <h2 > Title:</h2>
+          	{% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
+    </div>
+        
+    <div class="center-left" style="padding: 15px;max-width: 500px;">
+    	<input type="text" class="form-control" name="title" placeholder="Title" required autofocus>
+        <br>
+        <button class="btn btn-primary" type="submit">Create</button>
+    </div>
 </form>
+</div>
 {% endblock %}

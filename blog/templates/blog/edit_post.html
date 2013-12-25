@@ -1,20 +1,34 @@
-{% extends 'blog/base_post.html' %} 
-{% block head_title %}editing post: {{post.title}} {% endblock %}
-{% block title %}You're editing post: {{post.title}}{% endblock %}
+{% extends "blog/bootstrap_base.html" %}
+{% load staticfiles %}
 
-{% block content %}
+{% block title %}{{post.title}}{% endblock %}
+
+{%block header%}
+	
+{%endblock header%}
+
+{% block posts %}
 
 {% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
 
-<form name="editPost" action="{%url 'blog:edit_post' post.slug %}" method="post">
-    	{% csrf_token %} 
-    	Title:<br> <textarea name="title" rows="1" cols="100"> {{ post.title }} </textarea><br>
-    	Body:<br> <textarea name="body" rows="20" cols="100"> {{ post.body }} </textarea><br>
-       	Tags: (separated by ",")<br>
-       	    <textarea name="tags" rows="1" cols="100">{% for tag in post.tags.all %}{{tag.title}}, {% endfor %}</textarea><br>
-    	<input type="submit" value="Submit">
+<form name="editPost" action="{%url 'blog:edit_post' post.slug %}" role="form" method="post" style="padding: 15px;min-width: 250px;" >
+    {% csrf_token %}
+    <div class="text-left" style="padding: 15px;max-width: 600px;"> 
+        Title:
+        <br><textarea name="title"  class="form-control" required autofocus >{{post.title}}</textarea><br>
+        
+        Body:
+        <br><textarea name="body" class="form-control" required autofocus rows="20">{{ post.body }}</textarea><br>
+       	
+       	Tags: (separated by ",")
+       	<br><textarea name="tags" class="form-control" required autofocus>{% for tag in post.tags.all %}{{tag.title}}, {% endfor %}
+       	</textarea><br>
+
+        <button class="btn btn-success " type="submit">Submit</button>
+    </div>
 </form>
 
-<p style="color:Orchid">creation: {{post.creation_date}}<br>
-modification: {{post.modification_date}}</p>
-{%endblock%}
+{%endblock posts%}
+
+{%block pager%}
+{%endblock pager%}

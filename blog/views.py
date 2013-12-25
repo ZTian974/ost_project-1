@@ -51,7 +51,7 @@ def blog_posts(request,slug):
     blog = get_object_or_404(Blog,slug=slug)
     user = blog.user
     posts = blog.post_set.all()
-    paginator = Paginator(posts,10)
+    paginator = Paginator(posts,3)
     page = request.GET.get('page')
     try:
         post_page = paginator.page(page)
@@ -209,7 +209,7 @@ def tag(request,slug):
         'posts':post_page,
         })
     
-def lists(request):        
+def upload_file(request):        
         # Handle file upload
     if request.user.is_authenticated() == False:
         error_message="You're not authenticated user, you can't upload_file"
@@ -246,3 +246,8 @@ def about_me(request):
 def user_home(request, username):
     _user=get_object_or_404(User,username=username)
     return render(request,'blog/user_home.html',{'user':_user})
+
+def photoes(request):
+    return render(request, 'blog/photoes.html', {
+        'documents':Document.objects.all()
+        })

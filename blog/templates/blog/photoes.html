@@ -1,0 +1,32 @@
+{% extends "blog/bootstrap_base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    <title>all photoes</title>
+{% endblock title%}
+
+
+{%block content%}
+    <!-- List of uploaded documents -->
+    <div class="container">
+
+        <div class="blog-header">
+            <br>
+            <h2 class="blog-title">All uploads photoes</h2>
+        </div>
+
+        <div class="row">
+                {% for document in documents %}
+                    <div class="col-xs-6 col-md-4">
+                        <a href="{{ document.docfile.url}}" class="thumbnail">
+                            <img src="{{document.docfile.url}}">
+                        </a>
+                    </div>
+                {%empty%}
+                    <p class="blog-post-title">Don't have any uploads.</p>
+                {% endfor %}
+                
+                {% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
+        </div> <!-- ./row -->
+    </div><!-- container -->
+{%endblock content%}
