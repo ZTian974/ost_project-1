@@ -9,9 +9,18 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 
 def index(request):
+    posts = Post.objects.all()
+    paginator = Paginator(posts,5)
+    page = request.GET.get('page')
+    try:
+        post_page = paginator.page(page)
+    except PageNotAnInteger:
+        post_page = paginator.page(1)
+    except EmptyPage:
+        post_page = paginator.page(paginator.num_pages)
     context = {
         'blogs':Blog.objects.all(),
-        'posts':Post.objects.all()[:10],
+        'posts':post_page,
         'tags':Tag.objects.all()
         }
     return render(request,'blog/index.html',context)
@@ -51,7 +60,7 @@ def blog_posts(request,slug):
     blog = get_object_or_404(Blog,slug=slug)
     user = blog.user
     posts = blog.post_set.all()
-    paginator = Paginator(posts,3)
+    paginator = Paginator(posts,5)
     page = request.GET.get('page')
     try:
         post_page = paginator.page(page)
@@ -199,8 +208,9 @@ def create_post(request,slug):
 
 def tag(request,slug):
     tag = get_object_or_404(Tag,slug=slug)
+    tags = Tag.objects.all()
     posts = tag.post_set.all()
-    paginator = Paginator(posts,10)
+    paginator = Paginator(posts,5)
     page = request.GET.get('page')
     try:
         post_page = paginator.page(page)
@@ -211,6 +221,7 @@ def tag(request,slug):
     return render(request, 'blog/tag.html',{
         'tag':tag,
         'posts':post_page,
+        'tags':tags,
         })
     
 def upload_file(request):        
