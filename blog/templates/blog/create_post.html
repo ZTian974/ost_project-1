@@ -1,22 +1,38 @@
-{% extends 'blog/base_post.html' %} 
-{% block head_title %}creating post{% endblock %}
-{% block title %}You're creating a new post at Blog: {{blog.title}}{% endblock %}
+{% extends "blog/bootstrap_base.html" %}
+{% load staticfiles %}
 
-{% block content %}
+{% block title %}{{post.title}}{% endblock %}
+
+{%block header%}
+	<br>
+	<br>
+	<p class="blog-post-title">Create a new post at {{blog.title}}</p>	
+{%endblock header%}
+
+{% block posts %}
 
 {% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
 
-<p>Author: <b>{{blog.user.username}}</b> 
+<form name="editPost" action="{%url 'blog:create_post' blog.slug %}" role="form" method="post" style="padding: 15px;min-width: 250px;" >
+    {% csrf_token %}
+    <div class="text-left" style="padding: 15px;max-width: 600px;"> 
+        Title:
+        <br><textarea name="title"  class="form-control" required autofocus ></textarea><br>
+        
+        Body:
+        <br><textarea name="body" class="form-control" required autofocus rows="20"></textarea><br>
+       	
+       	Tags: (separated by ",")
+       	<br><textarea name="tags" class="form-control" required autofocus></textarea><br>
 
-<form name="createPost" action="{%url 'blog:create_post' blog.slug %}" method="post">
-    	{% csrf_token %} 
-    	<b>Title:</b> (Please enter a title, which can't be blank and less than 150 characters) <br>
-    	<textarea name="title" rows="1" cols="100">	</textarea><br>
-    	<b>Body:</b> (enter the body of the article)<br>
-    	<textarea name="body" rows="20" cols="100"> </textarea><br>
-    	<b>Tags:</b> (Please enter zero or more tags, which are separated by ",")<br> 
-    	<textarea name="tags" rows="1" cols="100">  </textarea><br>
-    	<input type="submit" value="Submit">
+       	Image URL:
+		<br><textarea name="image" class="form-control" autofocus></textarea><br>
+
+        <button class="btn btn-success " type="submit">Submit</button>
+    </div>
 </form>
 
-{%endblock%}
+{%endblock posts%}
+
+{%block pager%}
+{%endblock pager%}

@@ -23,6 +23,13 @@
                     <a href="{% url 'blog:user_home' user.username %}">{{user.username}}</a>
                 </p>
                 <hr>
+                {% if post.image %}
+                        <div class="col-xs-6 col-md-4">
+                            <a href="{{post.image}}" class="thumbnail">
+                            <img src="{{post.image}}" alt="...">
+                            </a>
+                        </div>
+                {% endif %}
                 <p>
                     {% autoescape off %} 
                     {{post.show_short_body}}                        

@@ -30,6 +30,7 @@ class Blog(models.Model):
 class Post(models.Model):
     blog = models.ForeignKey(Blog)
     tags = models.ManyToManyField('Tag',blank=True)
+    image = models.URLField(max_length=300, blank=True)
     title = models.CharField(max_length=150,db_index=True)
     body = models.TextField()
     slug = models.SlugField(max_length=150,db_index=True,editable=False)
@@ -44,6 +45,11 @@ class Post(models.Model):
             p = re.compile(r'[^\d\w_-]+')
             self.slug = p.sub('-',self.title[:100]) + str(random.randint(1,999999))
             self.save()
+
+    def add_image(self,img):
+        _img = img.strip()
+        self.image = _img
+        self.save()
     
     def add_tags(self,__tags):
         __tags = __tags.strip()

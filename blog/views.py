@@ -146,8 +146,10 @@ def edit_post(request,slug):
                         })            
                 _body = request.POST.get('body')
                 _tags = request.POST.get('tags')
+                _img = request.POST.get('image')
                 post.title = _title
                 post.body = _body
+                post.add_image(_img)
                 post.add_tags(_tags)
                 post.save()
                 return render(request, 'blog/post.html', {'post':post})
@@ -184,9 +186,11 @@ def create_post(request,slug):
                         })            
         _body = request.POST.get('body')
         _tags = request.POST.get('tags')
+        _img = request.POST.get('image')
         post = Post(title=_title,body=_body,blog=_blog)
         post.create_slug()
         post.add_tags(_tags)
+        post.add_image(_img)
         post.save()
         return render(request, 'blog/post.html', {'post':post,'user':request.user})
     else:

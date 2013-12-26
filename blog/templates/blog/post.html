@@ -18,6 +18,13 @@
     </a>    
     </p>
     <hr>
+    {% if post.image %}
+        <div class="col-xs-8 col-md-8">
+            <a href="{{post.image}}" class="thumbnail">
+                <img src="{{post.image}}" alt="...">
+            </a>
+        </div>
+    {% endif %}
     <p>
     {% autoescape off %} 
     {{post.show_html_body}}                        
@@ -37,6 +44,7 @@
 
     	{% endfor %}
 	</p>
+	
 </div>
 
 <a href="{% url 'blog:edit_post' post.slug%}" class="btn btn-info " role="button" >Edit</a>

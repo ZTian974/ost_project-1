@@ -14,11 +14,13 @@
                         <a href="{% url 'blog:user_home' post.blog.user.username %}">{{post.blog.user.username}}</a>
                     </p>
                     <hr>
-                    <div class="col-xs-6 col-md-4">
-                        <a href="http://127.0.0.1:8000/media/documents/2013/12/20/mac_os_x_lion-1920x1080.jpg" class="thumbnail">
-                        <img src="http://127.0.0.1:8000/media/documents/2013/12/20/mac_os_x_lion-1920x1080.jpg" alt="...">
-                        </a>
-                    </div>
+                    {% if post.image %}
+                        <div class="col-xs-6 col-md-6">
+                            <a href="{{post.image}}" class="thumbnail">
+                            <img src="{{post.image}}" alt="...">
+                            </a>
+                        </div>
+                    {% endif %}
                     <p>
                         {% autoescape off %} 
                         {{post.show_short_body}}                        

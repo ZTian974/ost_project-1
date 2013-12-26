@@ -4,7 +4,7 @@
 {% block title %}{{post.title}}{% endblock %}
 
 {%block header%}
-	
+	<br>	
 {%endblock header%}
 
 {% block posts %}
@@ -15,13 +15,17 @@
     {% csrf_token %}
     <div class="text-left" style="padding: 15px;max-width: 600px;"> 
         Title:
-        <br><textarea name="title"  class="form-control" required autofocus >{{post.title}}</textarea><br>
+        <br><textarea name="title"  class="form-control " required autofocus >{{post.title}}</textarea><br>
         
         Body:
         <br><textarea name="body" class="form-control" required autofocus rows="20">{{ post.body }}</textarea><br>
        	
        	Tags: (separated by ",")
        	<br><textarea name="tags" class="form-control" required autofocus>{% for tag in post.tags.all %}{{tag.title}}, {% endfor %}
+       	</textarea><br>
+
+       	Image URL:
+		<br><textarea name="image" class="form-control" autofocus>{{post.image}}
        	</textarea><br>
 
         <button class="btn btn-success " type="submit">Submit</button>
