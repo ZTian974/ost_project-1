@@ -24,6 +24,9 @@
 
     <a name="Top"></a>
   </head>
+
+  
+
 {% endblock head%}
 
   {%block body%}
@@ -170,6 +173,11 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'docs-assets/js/holder.js' %}"></script>
+    
+    {%block script%}
+
+    {%endblock script%}
+
     {%endblock script_load%}
   </body>
   {%endblock body%}

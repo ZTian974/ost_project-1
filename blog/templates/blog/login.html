@@ -1,21 +1,22 @@
 {% extends 'blog/bootstrap_base.html' %} 
 {% block title %}Sign in{% endblock %}
 
+
+
 {% block content %}
 
 <div class="container">
 	<div class="row">
 		<br>
     <br>
-      <form class="form-signin" role="form" method="post" style="padding: 15px;min-width: 250px;" action="{%url 'blog:login_page' %}">
+      <form name="loginForm" onsubmit="return validateForm()" class="form-signin" role="form" method="post" style="padding: 15px;min-width: 250px;" action="{%url 'blog:login_page' %}">
         {% csrf_token %}
         <div class="text-center"> 
           <h2 class="form-signin-heading">Please sign in</h2>
-          {% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
         </div>
         <div class="center-block" style="padding: 15px;max-width: 250px;">
-        <input type="text" class="form-control" name="username" placeholder="Username" required autofocus>
-        <input type="password" class="form-control" name="password" placeholder="Password" required>
+        <input type="text" class="form-control" name="username" placeholder="Username"  autofocus>
+        <input type="password" class="form-control" name="password" placeholder="Password" autofocus>
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
         </label>
@@ -23,11 +24,32 @@
       </div>
       </form>
 
-		
-
 		<p class="text-center">If you don't have an account, please <a href="{%url 'blog:sign_up' %}"><strong>sign up</strong></a></p>
 
     </div> <!-- /container -->
 </div>
+{% if error_message %}
+    <script>
+        alert("{{error_message | safe}}");
+    </script>
+{% endif %}
 
 {%endblock%}
+
+{%block script%}
+    <script>
+        function validateForm(){
+            var username=document.forms["loginForm"]["username"].value;
+            var password=document.forms["loginForm"]["password"].value;
+            if(username==null || username==""){
+                alert("username can't be blank");
+                return false;
+            }
+            if(password==null || password==""){
+                alert("password can't be blank");
+                return false;
+            }
+            return true;
+        }
+    </script>
+{%endblock script%}
