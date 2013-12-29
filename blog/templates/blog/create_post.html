@@ -11,8 +11,6 @@
 
 {% block posts %}
 
-{% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
-
 <form name="editPost" action="{%url 'blog:create_post' blog.slug %}" role="form" method="post" style="padding: 15px;min-width: 250px;" >
     {% csrf_token %}
     <div class="text-left" style="padding: 15px;max-width: 600px;"> 

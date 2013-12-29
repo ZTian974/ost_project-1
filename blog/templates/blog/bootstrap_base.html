@@ -179,6 +179,13 @@
     {%endblock script%}
 
     {%endblock script_load%}
+
+    {% if error_message %}
+      <script>
+        alert("{{error_message | safe}}");
+      </script>
+    {% endif %}
+
   </body>
   {%endblock body%}
 

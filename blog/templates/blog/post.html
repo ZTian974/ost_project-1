@@ -11,7 +11,6 @@
 
 <div class="blog-post">
 	<br>
-	{% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
     <h2 class="blog-post-title">{{post.title}}</h2>
     <p class="blog-post-meta">{{post.modification_date}} by 
     <a href="{% url 'blog:user_home' post.blog.user.username %}">{{post.blog.user.username}}

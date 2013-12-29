@@ -26,10 +26,11 @@
                     <p class="blog-post-title">Don't have any uploads</p>
                 {% endfor %}
                 
-                {% if error_message %}<p style="color:red" ><strong>{{error_message}}</strong></p>{% endif %}
                 <!-- Upload form. Note enctype attribute! -->
                 <br>
-                <div class="col-md-12">
+        </div> <!-- ./row -->
+
+        <div class="col-md-12">
                 <form action="{% url 'blog:upload_file' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                         <p>{{ form.non_field_errors }}</p>
@@ -44,6 +45,6 @@
                     </div>
                 </form>
                 </div>
-        </div> <!-- ./row -->
+
     </div><!-- container -->
 {%endblock content%}

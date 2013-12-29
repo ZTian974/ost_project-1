@@ -42,6 +42,10 @@ def login_page(request):
         if user is not None and user.is_active:
             login(request, user)
             return render(request,'blog/user_home.html',{'user':user})
+        elif not User.objects.filter(username=_username.strip()):
+            return render(request,'blog/login.html',{
+                'error_message':"ERROR: user doesn't exist!"
+                })
         else:
             return render(request,'blog/login.html',{
                 'error_message':"ERROR: password and username didn't match!"

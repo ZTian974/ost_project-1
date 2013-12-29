@@ -9,10 +9,6 @@
 
 {% block posts %}
 
-    {% if error_message %}
-    <p style="color:red;font-size:20px" ><strong>{{error_message}}</strong></p>
-    {% endif %}
-
     {% if posts %}
         <ol>
         {% for post in posts %}
