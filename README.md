@@ -48,17 +48,14 @@ Install
 
 	- install django: `sudo pip install Django`
 
+config
+---
+* create a database named "xxx" in mysql
 
-2. create a database named "xxx" in mysql
+* config database in ost_project/setting.py, and change the DATABASES' 'NAME' entry as the name "xxx"
 
-3. config database in ost_project/setting.py, and change the DATABASES' 'NAME' entry as the name "xxx"
+* get the project main directory "ost_project", input command: `python manage.py sql blog`. If there is no error, your database setting is right.
 
-4. get the project main directory "ost_project", 
-	command: python manage.py sql blog
-if there is no error, your database setting is right
-	command: python manage.py syncdb
-you might a admin user in this step, if it's your first time to run this app
+* create tables in database: `python manage.py syncdb`. You can set a admin user in this step, if it's your first time to run this app.
 
-5. run this app
- 	command: python manage.py runserver
- go to http://127.0.0.1:8000/blog/ or http://127.0.0.1:8000/admin
+* run this app: `python manage.py runserver`. Visit `http://127.0.0.1:8000/blog/` or `http://127.0.0.1:8000/admin`
