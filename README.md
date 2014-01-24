@@ -1,8 +1,13 @@
 ost_project
 ---
-####[blog address](http://ec2-54-200-28-13.us-west-2.compute.amazonaws.com/blog/)
+####[blog URL](http://ec2-54-200-28-13.us-west-2.compute.amazonaws.com/blog/)
+This blog system is built by Django, Apache, MySQL and Bootstrap, and is deployed on EC2 of AWS. The system handles multiple users and each user is able to create one or more blogs. A user can select a blog that he owns and write posts to it.
 
-1. build development environment on ubuntu
+Posts are sorted by modification time and orginated no more than 5 pages each page. Every page has 'next' and 'previous' links to other pages.
+
+Install
+---
+* development environment on ubuntu
 	
 	a. update system
 	command: sudo apt-get update
