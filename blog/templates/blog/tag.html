@@ -16,7 +16,8 @@
                 <br>
                 <h2 class="blog-post-title">{{post.title}}</h2>
                 <p class="blog-post-meta">{{post.modification_date}} by
-                    <a href="{% url 'blog:user_home' user.username %}">{{user.username}}</a>
+                    <a href="{% url 'blog:user_home' post.blog.user.username %}">{{post.blog.user.username}}
+                    </a> 
                 </p>
                 <hr>
                 {% if post.image %}
