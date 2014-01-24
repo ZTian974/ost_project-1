@@ -8,8 +8,7 @@ This blog system is built by Django, Apache, MySQL and Bootstrap, and is deploye
 * **pagenation** - every page has 'next' and 'previous' links to other pages, and each page has no more than 5 posts. 
 * **uploads** - user can upload images or other kind of files.
 * **RSS** - each blog has RSS link, that dumps a entire blog in XML format.
-
-posts are sorted by modification time and orginated
+* **embedded URL** 
 Install
 ---
 * development environment on ubuntu
