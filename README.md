@@ -12,43 +12,41 @@ This blog system is built by Django, Apache, MySQL and Bootstrap, and is deploye
 
 Install
 ---
-* development environment on ubuntu
+##### development environment on ubuntu
 	
-	a. update system
-	command: sudo apt-get update
+* update system: `sudo apt-get update`
 
-	b. install LAMP package (ref: https://help.ubuntu.com/community/ApacheMySQLPHP)
-		install tasksel: sudo apt-get install tasksel
+* install LAMP package ([ref](https://help.ubuntu.com/community/ApacheMySQLPHP))
+	- install tasksel: `sudo apt-get install tasksel`
 		
-		install LAMP: sudo tasksel install lamp-server
-		need set up mysql account in this step
+	- install LAMP: `sudo tasksel install lamp-server`. need set up mysql account in this step
 
-		optional install pypmyadmin: sudo apt-get install phpmyadmin
+	- optional install pypmyadmin: `sudo apt-get install phpmyadmin`
 
-	c. install mod_wsgi (ref: https://www.digitalocean.com/community/articles/installing-mod_wsgi-on-ubuntu-12-04)
-		sudo aptitude install apache2 apache2.2-common apache2-mpm-prefork apache2-utils libexpat1 ssl-cert
+* install mod_wsgi ([ref](https://www.digitalocean.com/community/articles/installing-mod_wsgi-on-ubuntu-12-04))
+	
 
-		sudo aptitude install libapache2-mod-wsgi
+	   `sudo aptitude install apache2 apache2.2-common apache2-mpm-prefork apache2-utils libexpat1 ssl-cert`
 
-		sudo service apache2 restart
+	   `sudo aptitude install libapache2-mod-wsgi`
 
-	d. install python-mysqldb
-		sudo apt-get install python-mysqldb
+	   `sudo service apache2 restart`
 
-	e. install django
-		install optional package:
-			sudo aptitude install python-imaging python-pythonmagick python-markdown python-textile python-docutils
 
-		use pip install django:
-			install pip and virtualenv (ref: http://www.saltycrane.com/blog/2010/02/how-install-pip-ubuntu/)
-				sudo apt-get install python-pip python-dev build-essential
+* install python-mysqldb: `sudo apt-get install python-mysqldb`
 
-				sudo pip install --upgrade pip
+* install django
+	- install optional package: `sudo aptitude install python-imaging python-pythonmagick python-markdown python-textile python-docutils`
+	- use pip install django:
+		install pip and virtualenv ([ref](http://www.saltycrane.com/blog/2010/02/how-install-pip-ubuntu/))
+			
+		`sudo apt-get install python-pip python-dev build-essential`
 
-				sudo pip install --upgrade virtualenv
+		`sudo pip install --upgrade pip`
 
-			install django:
-				sudo pip install Django
+		`sudo pip install --upgrade virtualenv`
+
+	- install django: `sudo pip install Django`
 
 
 2. create a database named "xxx" in mysql
