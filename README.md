@@ -9,6 +9,7 @@ This blog system is built by Django, Apache, MySQL and Bootstrap, and is deploye
 * **uploads** - user can upload images or other kind of files.
 * **RSS** - each blog has RSS link, that dumps a entire blog in XML format.
 * **embedded URL** 
+
 Install
 ---
 * development environment on ubuntu
