@@ -1,10 +1,15 @@
 ost_project
 ---
 ####[blog URL](http://ec2-54-200-28-13.us-west-2.compute.amazonaws.com/blog/)
-This blog system is built by Django, Apache, MySQL and Bootstrap, and is deployed on EC2 of AWS. The system handles multiple users and each user is able to create one or more blogs. A user can select a blog that he owns and write posts to it.
+This blog system is built by Django, Apache, MySQL and Bootstrap, and is deployed on EC2 of AWS. 
 
-Posts are sorted by modification time and orginated no more than 5 pages each page. Every page has 'next' and 'previous' links to other pages.
+* **multiple users** - The system handles multiple users and each user is able to create one or more blogs. A user can select a blog that he owns and write posts to it.
+* **tags** - each post has any number of tags and click a tag can view all posts marked by that tag. 
+* **pagenation** - every page has 'next' and 'previous' links to other pages, and each page has no more than 5 posts. 
+* **uploads** - user can upload images or other kind of files.
+* **RSS** - each blog has RSS link, that dumps a entire blog in XML format.
 
+posts are sorted by modification time and orginated
 Install
 ---
 * development environment on ubuntu
