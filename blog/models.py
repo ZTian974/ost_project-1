@@ -30,6 +30,7 @@ class Blog(models.Model):
 class Post(models.Model):
     blog = models.ForeignKey(Blog)
     tags = models.ManyToManyField('Tag',blank=True)
+    comments = models.ManyToManyField('Comment',blank=True)
     image = models.URLField(max_length=300, blank=True)
     title = models.CharField(max_length=150,db_index=True)
     body = models.TextField()
@@ -119,6 +120,16 @@ class Tag(models.Model):
     class Meta:
         ordering = ('title',)
         
+class Comment(models.Model):
+    content = models.TextField()
+    user = models.ForeignKey(User)
+    creation_date = models.DateTimeField(auto_now_add=True)
+   # title = models.CharField(max_length=150,db_index=True)
+    # slug = models.SlugField(max_length=150,db_index=True,editable=False)
+ 
+    class Meta:
+        ordering = ('creation_date',)
+
 class DocumentForm(forms.Form):
 #    title = forms.CharField(max_length=50)
     docfile = forms.FileField(

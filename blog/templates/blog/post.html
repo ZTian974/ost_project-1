@@ -44,6 +44,12 @@
     	{% endfor %}
 	</p>
 	
+
+    {% for comment in comments %}
+        <p>{{comment.content}}</p>
+    {%empty%}
+        <p>No comments</p>
+    {% endfor%}
 </div>
 
 <a href="{% url 'blog:edit_post' post.slug%}" class="btn btn-info " role="button" >Edit</a>

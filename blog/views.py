@@ -135,7 +135,8 @@ def post(request,slug):
     p = get_object_or_404(Post,slug=slug)
     blog = p.blog
     user = blog.user
-    return render(request,'blog/post.html',{'post':p,'user':user})
+    comments = p.comments.all()
+    return render(request,'blog/post.html',{'post':p,'user':user,'comments':comments})
 
 def edit_post(request,slug):
     if request.user.is_authenticated():
