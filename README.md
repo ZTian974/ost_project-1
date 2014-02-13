@@ -1,6 +1,6 @@
 ost_project
 ---
-####[blog URL](http://ec2-54-200-28-13.us-west-2.compute.amazonaws.com/blog/)
+####[blog System URL](http://ec2-54-200-28-13.us-west-2.compute.amazonaws.com/blog/)
 This blog system is built by Django, Apache, MySQL and Bootstrap, and is deployed on EC2 of AWS. 
 
 * **multiple users** - The system handles multiple users and each user is able to create one or more blogs. A user can select a blog that he owns and write posts to it.
